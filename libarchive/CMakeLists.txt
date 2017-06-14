@@ -242,12 +242,6 @@ ELSEIF(ARCHIVE_ACL_SUNOS)
   LIST(APPEND libarchive_SOURCES archive_disk_acl_sunos.c)
 ENDIF()
 
-# Libarchive is a shared library
-ADD_LIBRARY(archive SHARED ${libarchive_SOURCES} ${include_HEADERS})
-TARGET_INCLUDE_DIRECTORIES(archive PUBLIC .)
-TARGET_LINK_LIBRARIES(archive ${ADDITIONAL_LIBS})
-SET_TARGET_PROPERTIES(archive PROPERTIES SOVERSION ${SOVERSION})
-
 # archive_static is a static library
 ADD_LIBRARY(archive_static STATIC ${libarchive_SOURCES} ${include_HEADERS})
 TARGET_LINK_LIBRARIES(archive_static ${ADDITIONAL_LIBS})
@@ -257,15 +251,3 @@ SET_TARGET_PROPERTIES(archive_static PROPERTIES COMPILE_DEFINITIONS
 IF(NOT WIN32 OR CYGWIN)
   SET_TARGET_PROPERTIES(archive_static PROPERTIES OUTPUT_NAME archive)
 ENDIF(NOT WIN32 OR CYGWIN)
-
-IF(ENABLE_INSTALL)
-  # How to install the libraries
-  INSTALL(TARGETS archive archive_static
-          RUNTIME DESTINATION bin
-          LIBRARY DESTINATION lib
-          ARCHIVE DESTINATION lib)
-  INSTALL_MAN(${libarchive_MANS})
-  INSTALL(FILES ${include_HEADERS} DESTINATION include)
-ENDIF()
-
-add_subdirectory(test)
