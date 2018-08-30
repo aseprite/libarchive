@@ -636,6 +636,13 @@ MACRO (LA_CHECK_INCLUDE_FILE header var)
       ENDIF (${var})
 ENDMACRO (LA_CHECK_INCLUDE_FILE)
 
+# In the GNU C Library, "makedev" is defined by <sys/sysmacros.h>. For
+# historical compatibility, it is currently defined by <sys/types.h>
+# as well, but there are plans to remove this soon. To use "makedev",
+# we've to include <sys/sysmacros.h> directly. (Needed for
+# archive_pack_dev.c)
+LA_CHECK_INCLUDE_FILE("sys/sysmacros.h" HAVE_SYS_SYSMACROS_H)
+
 # Some FreeBSD headers assume sys/types.h was already included.
 LA_CHECK_INCLUDE_FILE("sys/types.h" HAVE_SYS_TYPES_H)
 
