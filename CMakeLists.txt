@@ -2016,7 +2016,7 @@ ENDIF(MSVC)
 IF(APPLE)
   # CC_MD5_Init() functions are deprecated on macOS 10.15, but we want to use them
   ADD_DEFINITIONS(-Wno-deprecated-declarations)
-ENDIF(MSVC)
+ENDIF(APPLE)
 
 IF(ENABLE_TEST)
   ADD_CUSTOM_TARGET(run_all_tests)
