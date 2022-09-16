@@ -29,14 +29,6 @@ GET_PROPERTY(cached_type CACHE CMAKE_BUILD_TYPE PROPERTY TYPE)
 IF("${cached_type}" STREQUAL "UNINITIALIZED")
   SET(CMAKE_BUILD_TYPE "${CMAKE_BUILD_TYPE}" CACHE STRING "Build Type" FORCE)
 ENDIF("${cached_type}" STREQUAL "UNINITIALIZED")
-# Check the Build Type.
-IF(NOT "${CMAKE_BUILD_TYPE}"
-       MATCHES "^(Debug|Release|RelWithDebInfo|MinSizeRel)\$")
-  MESSAGE(FATAL_ERROR
-          "Unknown keyword for CMAKE_BUILD_TYPE: ${CMAKE_BUILD_TYPE}\n"
-          "Acceptable keywords: Debug,Release,RelWithDebInfo,MinSizeRel")
-ENDIF(NOT "${CMAKE_BUILD_TYPE}"
-          MATCHES "^(Debug|Release|RelWithDebInfo|MinSizeRel)\$")
 
 # On MacOS, prefer MacPorts libraries to system libraries.
 # I haven't come up with a compelling argument for this to be conditional.
